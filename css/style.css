@@ -1,0 +1,23 @@
+main h1 {
+	margin-top: 30px;
+	margin-bottom: 30px;
+	text-align: center;
+
+}
+
+main form input {
+	margin-top: 20px;
+}
+
+
+@media only screen and (max-width: 480px){
+
+	main#members-page .cover-img {
+		max-width: 90%;
+	}
+
+}
+
+
+
+
