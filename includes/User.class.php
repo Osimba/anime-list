@@ -21,6 +21,26 @@ class User extends Dbh {
 
 	}
 
+	public function checkForgotenUser($email) {
+
+		$conn = $this->connect();
+
+		try {
+
+			$stmt = $conn->prepare("SELECT username, password FROM users WHERE email = :email");
+				$stmt->bindParam(':email', $email);
+				$stmt->execute();
+
+				$row = $stmt->fetch();
+
+			} catch (Exception $e) {
+
+				echo "Error: " . $e->getMessage();
+			}
+
+		return $row;
+	}
+
 	private function getUser($username) {
 
 		$conn = $this->connect();
