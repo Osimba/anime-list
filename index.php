@@ -6,19 +6,10 @@
 
 	session_start();
 
-
-	if(isset($_GET['logout'])) {
-		session_unset();
-		session_destroy();
-
-		header('location: ./index.php');
+	$error['alert'] = '';
 
 
-
-	} else if(isset($_SESSION['user'])) {
-		header('location: ./members.php');
-
-	} else if($_SERVER["REQUEST_METHOD"] == "POST") {
+	if($_SERVER["REQUEST_METHOD"] == "POST") {
 
 		$username = trim($_POST['username']);
 		$password = $_POST['password'];
@@ -28,12 +19,37 @@
 		if($userObj->checkUserCredentials($username, $password)) {
 
 			$_SESSION['user'] = $username;
+			$_SESSION['last_active'] = time();
 
 			header('location: ./members.php');
 		} else {
-			header('location: ./index.php?wrongCredentials=true');
+			header('location: ./index.php?wrongCredentials');
 		}
 
+	} else {
+
+		if(isset($_GET['logout'])) {
+			session_unset();
+			session_destroy();
+
+			header('location: ./index.php');
+		} 
+
+		if(isset($_SESSION['user'])) {
+			header('location: ./members.php');
+		} 
+
+		if(isset($_GET['unauthorized'])) {
+	        $error['alert'] = 'Please login to view this page!';
+	    }
+
+	    if(isset($_GET['wrongCredentials'])) {
+	        $error['alert'] = 'Incorrect username or password!';
+	    }
+	    
+	    if(isset($_GET['timeout'])) {
+	        $error['alert'] = 'Session timed out! Please login again!';
+	    }
 	}
 
 ?>
@@ -48,24 +64,6 @@
 	<link rel="stylesheet" type="text/css" href="./css/style.css">
 </head>
 <body>
-
-		<?php
-			
-			/*
-			echo "<h1>Anime List:</h1><br>";
-			echo "<table style='border: solid 1px black;'>";
-			echo "<tr><th>ID</th><th>Title</th><th>Genre</th><th>Rating</th><th># of Episodes</th><th>Image File</th></tr>";
-
-			$obj = new Anime;
-			$row = $obj->getAllAnime();
-
-
-			echo "<tr><td>" . $row['id'] . "</td><td>" . $row['title'] . "</td><td>" . $row['genre'] . "</td><td>" . $row['rating'] . "</td><td>" . $row['episodes'] . "</td><td>" . $row['image'] . "</td></tr>";
-
-			echo "</table>";
-			*/
-			
-		?>
 
 		<header>
 			<nav class="navbar navbar-expand-lg navbar-light bg-primary">
@@ -85,9 +83,8 @@
 			<h1>Login to the Database</h1>
 
 			<?php 
-				if(isset($_GET['wrongCredentials'])) {
-					echo "The username or password you entered is incorrect!";
-					echo "<script>document.getElementsByName('username')[0].focus()</script>";
+				if($error['alert'] != '') {
+					echo "<div class='alert alert-danger'>" . $error['alert'] . "</div>";
 				}
 			?>
 

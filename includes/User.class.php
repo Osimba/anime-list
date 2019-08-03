@@ -7,50 +7,48 @@ class User extends Dbh {
 		$user = array();
 		$conn = $this->connect();
 
-		try {
-			
-			$stmt = $conn->prepare("SELECT * FROM users WHERE username = :username AND password = :password");
-			$stmt->bindParam(':username', $username);
-			$stmt->bindParam(':password', $password);
-			$stmt->execute();
+		$hash = $this->getUser($username);
 
-			if($row = $stmt->fetch()) {
-				return true;
-			} 
+		if(!$hash['error']) {
 
-			return false;
-		} catch (Exception $e) {
-			echo "Error: " . $e->getMessage();
+			$auth = password_verify($password, $hash['password']);
+
+		} else {
+			$auth = false;
 		}
+
+		return $auth;
+
 	}
 
-	public function getUser($email) {
+	private function getUser($username) {
 
-		$user = array();
 		$conn = $this->connect();
 
-		try {
+		if($this->userExists($username, "")) {		
 
-			$stmt = $conn->prepare("SELECT * FROM users WHERE email = :email");
-			$stmt->bindParam(':email', $email);
-			$stmt->execute();
+			try {
 
-			while ($row = $stmt->fetch()) {
-	
-				$user['username'] = $row['username'];
-				$user['password'] = $row['password'];
-				
-				return $user;
+				$stmt = $conn->prepare("SELECT password FROM users WHERE username = :username");
+				$stmt->bindParam(':username', $username);
+				$stmt->execute();
+
+				$row = $stmt->fetch();
+				$row['error'] = false;
+					
+			} catch (Exception $e) {
+
+				echo "Error: " . $e->getMessage();
 			}
 
-			$user['error'] = "User doesn't exist!";
-	
-			return $user;
-			
-		} catch (Exception $e) {
+		} else {
 
-			echo "Error: " . $e->getMessage();
+			$row['error'] = true;
 		}
+
+
+		return $row;
+		
 	}
 
 
@@ -98,9 +96,9 @@ class User extends Dbh {
 			$stmt->bindParam(':username', $username);
 			$stmt->bindParam(':email', $email);
 			$stmt->execute();
-			$stmt->store_result();
 
-			return $stmt->num_rows > 0;
+			if($stmt->fetch()) return true;
+			else return false;
 
 		} catch (Exception $e) {
 			echo $e->getMessage();
