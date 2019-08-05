@@ -6,7 +6,7 @@
 
 	session_start();
 
-	$error['alert'] = '';
+	$alert['error'] = '';
 
 
 	if($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -40,15 +40,15 @@
 		} 
 
 		if(isset($_GET['unauthorized'])) {
-	        $error['alert'] = 'Please login to view this page!';
+	        $alert['error'] = 'Please login to view this page!';
 	    }
 
 	    if(isset($_GET['wrongCredentials'])) {
-	        $error['alert'] = 'Incorrect username or password!';
+	        $alert['error'] = 'Incorrect username or password!';
 	    }
 	    
 	    if(isset($_GET['timeout'])) {
-	        $error['alert'] = 'Session timed out! Please login again!';
+	        $alert['error'] = 'Session timed out! Please login again!';
 	    }
 	}
 
@@ -57,7 +57,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<title>Home</title>
 
 	<!--CSS Style Sheets -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -83,8 +83,8 @@
 			<h1>Login to the Database</h1>
 
 			<?php 
-				if($error['alert'] != '') {
-					echo "<div class='alert alert-danger'>" . $error['alert'] . "</div>";
+				if($alert['error'] != '') {
+					echo "<div class='alert alert-danger'>" . $alert['error'] . "</div>";
 				}
 			?>
 

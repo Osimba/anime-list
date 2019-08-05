@@ -1,0 +1,7 @@
+--
+-- Anime Database dump for table 'anime'
+--
+
+INSERT INTO `anime` VALUES(NULL, 'Cowboy Bebop', 'Future Fantasy', 7, 25, 'images/cowboy-bebop-cover.jpg');
+INSERT INTO `anime` VALUES(NULL, 'Prince of Tennis', 'Sports', 10, 177, 'images/prince-of-tennis-cover.jpg');
+INSERT INTO `anime` VALUES(NULL, 'My Hero Academia', 'Action', 3, 150, 'images/my-hero-academia-cover.jpg');

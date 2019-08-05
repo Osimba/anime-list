@@ -21,24 +21,69 @@ class User extends Dbh {
 
 	}
 
-	public function checkForgotenUser($email) {
+	public function resetRequest($email, $token) {
 
 		$conn = $this->connect();
 
 		try {
 
-			$stmt = $conn->prepare("SELECT username, password FROM users WHERE email = :email");
+			$stmt = $conn->prepare("UPDATE users SET token = :token WHERE email = :email");
+				$stmt->bindParam(':token', $token);
 				$stmt->bindParam(':email', $email);
 				$stmt->execute();
 
-				$row = $stmt->fetch();
+				return $stmt->rowCount() > 0;
+
 
 			} catch (Exception $e) {
 
 				echo "Error: " . $e->getMessage();
 			}
 
-		return $row;
+		return false;
+	}
+
+	public function changePassword($email, $token, $password) {
+
+		$conn = $this->connect();
+
+		try {
+
+			$stmt = $conn->prepare("UPDATE users SET password = :password WHERE email = :email AND token = :token");
+			$stmt->bindParam(':password', $password);
+			$stmt->bindParam(':email', $email);
+			$stmt->bindParam(':token', $token);
+			$stmt->execute();
+
+			if($stmt->rowCount() > 0) {
+				return destroyToken($email, $token);
+			}
+			
+			
+		} catch (Exception $e) {
+			echo "Error: " . $e->getMessage();
+		}
+
+		return false;
+	}
+
+	private function destroyToken($email, $token) {
+
+		$conn = $this->connect();
+
+		try {
+
+			$stmt = $conn->prepare("UPDATE users SET token = '' WHERE email = :email");
+			$stmt->bindParam(':email', $email);
+			$stmt->execute();
+
+			return $stmt->rowCount() > 0;
+			
+		} catch (Exception $e) {
+			echo "Error: " . $e->getMessage();
+		}
+
+		return false;
 	}
 
 	private function getUser($username) {
@@ -88,9 +133,9 @@ class User extends Dbh {
 				$stmt->bindParam(':password', $password);
 				
 				if ($stmt->execute()) {
-					return "Successfully created account!";
+					return 101;
 				} else {
-					return "Failed to create user";
+					return 102;
 				}
 
 				
@@ -100,7 +145,7 @@ class User extends Dbh {
 			}
 		}
 
-		return "User already exists!";
+		return 103;
 
 		
 

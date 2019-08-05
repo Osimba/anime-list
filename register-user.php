@@ -6,8 +6,8 @@
 	/* Register New User */
 
 	session_start();
-	$error['alert'] = '';
-
+	$alert['error'] = '';
+	$alert['success'] = '';
 
 	/* 
 		- Username (8-20)
@@ -21,12 +21,26 @@
 	if($_SERVER["REQUEST_METHOD"] == "POST") {
 
 		if($_POST["password"] != $_POST["password2"]) {
-			$error['alert'] = "The passwords do not match!";
+			$alert['error'] = "The passwords do not match!";
 		} else {
 
 			$userObj = new User;
 			$result = $userObj->createUser(trim($_POST["username"]), trim($_POST["email"]), password_hash($_POST["password"], PASSWORD_BCRYPT));
-			echo $result;
+
+			switch ($result) {
+				case 101:
+					$alert['success'] = "Successfully created account!";
+					break;
+				case 102:
+					$alert['error'] = "Failed to create user. Please try again.";
+					break;
+				case 103:
+					$alert['error'] = "User already exists!";
+					break;
+				default:
+					$alert['error'] = "An error occured when trying to process your request. Please try again.";
+					break;
+			}
 		}
 	}
 
@@ -35,7 +49,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<title>Register User</title>
 
 	<!--CSS Style Sheets -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -61,8 +75,12 @@
 			<h1>Register New User</h1>
 
 			<?php 
-				if($error['alert'] != '') {
+				if($alert['error'] != '') {
 					echo "<div class='alert alert-danger'>" . $error['alert'] . "</div>";
+				}
+
+				if($alert['success'] != '') {
+					echo "<div class='alert alert-success'>" . $success['alert'] . "</div>";
 				}
 			?>
 
