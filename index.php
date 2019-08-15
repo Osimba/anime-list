@@ -65,19 +65,19 @@
 </head>
 <body>
 
-		<header>
-			<nav class="navbar navbar-expand-lg navbar-light bg-primary">
-  				<a class="navbar-brand" href="./index.php">Anime Database</a>
-  				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    				<span class="navbar-toggler-icon"></span>
-  				</button>
-				<div class="collapse navbar-collapse" id="navbarNav">
-					<div class="navbar-nav">
-				    	
-				    </div>
-				</div><!-- #navbarNav -->
-			</nav>
-		</header>
+	<header>
+		<nav class="navbar navbar-expand-lg navbar-light bg-primary">
+			<a class="navbar-brand" href="./index.php">Anime Database</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<div class="navbar-nav">
+			    	
+			    </div>
+			</div><!-- #navbarNav -->
+		</nav>
+	</header>
 
 		<main id="login-page" class="container">
 			<h1>Login to the Database</h1>

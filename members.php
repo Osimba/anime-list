@@ -28,6 +28,7 @@
 		header('location: ./index.php?unauthorized');
 	}
 
+	$userID = 001;
 
 
 ?>
@@ -44,21 +45,22 @@
 
 	<header>
 		<nav class="navbar navbar-expand-lg navbar-light bg-primary">
-				<a class="navbar-brand" href="./index.php">Anime Database</a>
+				<a class="navbar-brand" href="<?= ROOT_DIR ?>">Anime Database</a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 				</button>
 			<div class="collapse navbar-collapse" id="navbarNav">
 				<div class="navbar-nav">
-					<a class="nav-item nav-link" href="./members.php">All Anime</a>
-			    	<a class="nav-item nav-link" href="./user-list.php">My List</a>
+					<a class="nav-item nav-link" href="<? echo ROOT_DIR . 'members.php' ?>">All Anime</a>
+			    	<a class="nav-item nav-link" href="<? echo ROOT_DIR . 'users/profile?id=' . $userID ?>">My List</a>
 			    </div>
+			    <div class="navbar-nav ml-auto">
+					<a class="nav-link" href="<? echo ROOT_DIR . 'users/profile?id=' . $userID ?>"><? echo $_SESSION["user"]; ?></a>
+					<a class="nav-link" href="./index.php?logout=true">Logout</a>
+				</div>
 			</div><!-- #navbarNav -->
 
-			<div class="navbar-nav ml-auto">
-				<p class="my-2"><? echo $_SESSION["user"]; ?></p>
-				<a class="nav-link" href="./index.php?logout=true">Logout</a>
-			</div>
+			
 		</nav>
 	</header>
 
@@ -66,23 +68,20 @@
 		<h1>All Anime</h1>
 
 		<div class="row anime-items">
-			<?php
+			
+			<?php foreach($anime as $a) { ?>
 
-
-
-				foreach($anime as $a) {
-
-					echo "<div class='col-md-6 col-lg-4'>";
-					echo "<img class='cover-img' src='" . $a['image'] . "'>";
-					echo "<p class='rating'>" . $a['rating'] . "</p>";
-					echo "<h3>" . $a['title'] . "</h3>";
-					echo "<p>" . $a['genre'] . "</p>";
-					echo "<p>" . $a['episodes'] . " episodes</p>";
-					echo "</div>";
+				<ul class="col-md-6 col-lg-4 card">
+					<li>
+						<h3> <?= $a['title'] ?> </h3>
+						<img class="cover-img" src="<?= $a['image'] ?>">
+						<p class='rating'> <?= $a['rating'] ?>/10</p>
+						<p> <?= $a['genre'] ?> </p>
+						<p> <?= $a['episodes'] ?> episodes</p>
+					</li>
+				</ul>
 				
-				}
-
-			?>
+			<?php } ?>
 
 			
 		</div>

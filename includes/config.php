@@ -1,5 +1,8 @@
 <?php 
 
+	//Directory
+	const ROOT_DIR = 'http://localhost/anime-list/';
+
 	//Session timeout variable
 	$config['session_timeout'] = 10 * 60; //seconds
 
@@ -8,4 +11,6 @@
 	const SMTP_PORT = 2525;
 	const SMTP_USER = '81b1fb911c1cb9';
 	const SMTP_PASS = 'e5db0ec8da2826';
+
+
  ?>

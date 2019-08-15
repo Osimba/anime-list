@@ -1,3 +1,4 @@
+/* Global */
 .navbar-light .navbar-brand,
 .navbar-light .navbar-brand:focus,
 .navbar-light .navbar-brand:hover {
@@ -9,13 +10,37 @@ main h1 {
 	margin-top: 30px;
 	margin-bottom: 30px;
 	text-align: center;
-
 }
 
 main form input {
 	margin-top: 20px;
 }
 
+
+/* Members Page */
+main#members-page li {
+	list-style-type: none;
+}
+
+.rating {
+	opacity: 0;
+	overflow: hidden;
+	height: 0px;
+	width: 100%;
+	background-color: #222222dd;
+	position: absolute;
+	left: 0; right: 0;
+	bottom: 0px;
+	transition: .5s ease;
+	margin: 0;
+	color: white;
+	font-size: 5.0em;
+}
+	.card li:hover .rating {
+		opacity: 1;
+		height: 100%;
+		padding-top: 60%;
+	}
 
 
 
