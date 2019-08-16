@@ -1,6 +1,41 @@
 <?php
+require_once('Dbh.class.php');
 
 class User extends Dbh {
+
+	public function getAllUsers() {
+
+		$conn = $this->connect();
+		$users = array();
+
+		try {
+			
+			$stmt = $conn->prepare("SELECT id, username, email, user_role, image FROM users");
+			$stmt->execute();
+
+			$i = 0;
+
+
+			while($row = $stmt->fetch()) {
+
+				$usesrs[$i]['id'] = $row['id'];
+				$users[$i]['username'] = $row['username'];
+				$users[$i]['email'] = $row['email'];
+				$users[$i]['user_role'] = $row['user_role'];
+				$users[$i]['image'] = $row['image'];
+
+				
+				$i++;		
+			}
+
+			return $users;
+
+		} catch (Exception $e) {
+
+			echo "Error: " . $e->getMessage();
+			
+		}
+	}
 
 
 	public function checkUserCredentials($username, $password) {
@@ -127,10 +162,11 @@ class User extends Dbh {
 
 			try {
 			
-				$stmt = $conn->prepare("INSERT INTO users (username, email, password) VALUES (:username, :email, :password)");
+				$stmt = $conn->prepare("INSERT INTO users (username, email, password, user_role) VALUES (:username, :email, :password, :user_role)");
 				$stmt->bindParam(':username', $username);
 				$stmt->bindParam(':email', $email);
 				$stmt->bindParam(':password', $password);
+				$stmt->bindParam(':user_role', 'Member');
 				
 				if ($stmt->execute()) {
 					return 101;
