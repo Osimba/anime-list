@@ -37,6 +37,39 @@ class Anime extends Dbh {
 		}
 	}
 
+	public function getAnime($id) {
+
+		$conn = $this->connect();
+		$anime = array();
+
+		//Pull data from database
+		try {
+
+			$stmt = $conn->prepare("SELECT * FROM anime WHERE id = :id");
+			$stmt->bindParam(':id', $id);
+			$stmt->execute();
+
+
+			$row = $stmt->fetch();
+
+				$anime['id'] = $row['id'];
+				$anime['title'] = $row['title'];
+				$anime['genre'] = $row['genre'];
+				$anime['rating'] = $row['rating'];
+				$anime['episodes'] = $row['episodes'];
+				$anime['image'] = $row['image'];
+					
+		
+
+			return $anime;
+			
+			
+		} catch (Exception $e) {
+			echo "Unable to get data from database: " . $e->getMessage();
+		}
+
+	}
+
 
 	/* Create */
 	public function addAnime($title, $genre, $rating, $episodes, $image) {
