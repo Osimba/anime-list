@@ -18,8 +18,12 @@
 			header('location: ./members.php');
 		} else {
 
+			$userObj = new User;
+
+
 			$animeObj = new Anime;
 			$anime = $animeObj->getAnime($_GET['id']);
+			$comments = $animeObj->getComments($anime['id']);
 
 			//check for inactivity
 			if(time() > $_SESSION['last_active'] + $config['session_timeout']) {
@@ -51,13 +55,41 @@
 	
 	<!-- 
 		Display all the information for the given anime
-		If GET[id] isn't set, then user should be redirected to the members page
-		impliment time out rules, session rules, etc.
-		Comments on the anime should be from newest to oldest
-		comments should display user, image, datetime and text
+
 	-->
 
 	<h1><?php echo $anime['title'] ?></h1>
+
+
+
+
+
+	<div class="container">
+		
+		<h2>Comments</h2>
+
+		<?php forEach($comments as $comment) { ?>
+
+
+			<div id="<?php echo 'comment-' . $comment['comment_num']; ?>" class="comment">
+				<div class="comment-info">
+					<img src="<?php echo 'images/' . $userObj->getUserInfo($comment['user_id'])['image']; ?>" alt="avatar">
+					<p><?php echo $userObj->getUserInfo($comment['user_id'])['username'] . ' - ' . $comment['time_stamp']; ?></p>
+				</div>
+				<div class="comment-text">
+					<p><?php echo $comment['comment']; ?></p>
+					<a href="<?php echo '#comment-' . $comment['comment_num']; ?>">Reply</a>
+					</div>
+
+				 
+				
+				
+			</div>
+
+		<?php } ?>
+
+
+	</div>
 
 </main>
 

@@ -70,6 +70,40 @@ class Anime extends Dbh {
 
 	}
 
+	public function getComments($id) {
+
+		$conn = $this->connect();
+		$comments = array();
+
+		//Pull data from database
+		try {
+
+			$stmt = $conn->prepare("SELECT * FROM comments WHERE anime_id = :id ORDER BY comment_num DESC");
+			$stmt->bindParam(':id', $id);
+			$stmt->execute();
+
+			$i = 0;
+
+
+			while($row = $stmt->fetch()) {
+
+				$comments[$i]['comment_num'] = $row['comment_num'];
+				$comments[$i]['user_id'] = $row['user_id'];
+				$comments[$i]['anime_id'] = $row['anime_id'];
+				$comments[$i]['time_stamp'] = $row['time_stamp'];
+				$comments[$i]['comment'] = $row['comment'];
+
+				$i++;					
+			}
+
+			return $comments;
+			
+			
+		} catch (Exception $e) {
+			echo "Unable to get data from database: " . $e->getMessage();
+		}
+	}
+
 
 	/* Create */
 	public function addAnime($title, $genre, $rating, $episodes, $image) {

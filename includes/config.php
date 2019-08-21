@@ -4,7 +4,7 @@
 	const ROOT_DIR = 'http://localhost/anime-list/';
 
 	//Session timeout variable
-	$config['session_timeout'] = 10 * 60; //seconds
+	$config['session_timeout'] = 1099999 * 60; //seconds
 
 	//Mailer Variables
 	const SMTP_HOST = 'smtp.mailtrap.io';

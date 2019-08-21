@@ -72,6 +72,28 @@ main#members-page li {
 	display: inline-block;
 }
 
+/* Anime Page */
+.comment {
+	padding-bottom: 20px;
+	width: 100%;
+}
+	.comment .comment-info {
+		width: 100%;
+	}
+		.comment .comment-info img {
+			float: left;
+			width: 50px;
+			margin-right: 5px;
+			
+		}
+		.comment .comment-info p {
+			margin-bottom: 0px;
+		}
+	.comment .comment-text {
+		clear: both;
+		padding: 10px;
+	}
+
 
 @media only screen and (max-width: 480px){
 

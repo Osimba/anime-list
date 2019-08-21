@@ -3,7 +3,7 @@ require_once('Dbh.class.php');
 
 class User extends Dbh {
 
-	public function getAllUsers() {
+	public function getAllUsers($username) {
 
 		$conn = $this->connect();
 		$users = array();
@@ -11,6 +11,7 @@ class User extends Dbh {
 		try {
 			
 			$stmt = $conn->prepare("SELECT id, username, email, user_role, image FROM users");
+			
 			$stmt->execute();
 
 			$i = 0;
@@ -18,7 +19,7 @@ class User extends Dbh {
 
 			while($row = $stmt->fetch()) {
 
-				$usesrs[$i]['id'] = $row['id'];
+				$users[$i]['id'] = $row['id'];
 				$users[$i]['username'] = $row['username'];
 				$users[$i]['email'] = $row['email'];
 				$users[$i]['user_role'] = $row['user_role'];
@@ -29,6 +30,36 @@ class User extends Dbh {
 			}
 
 			return $users;
+
+		} catch (Exception $e) {
+
+			echo "Error: " . $e->getMessage();
+			
+		}
+	}
+
+	public function getUserInfo($id) {
+
+		$conn = $this->connect();
+		$user = array();
+
+		try {
+			
+			$stmt = $conn->prepare("SELECT id, username, email, user_role, image FROM users WHERE id = :id");
+			$stmt->bindParam(':id', $id);
+			$stmt->execute();
+
+			$row = $stmt->fetch();
+
+			$user['id'] = $row['id'];
+			$user['username'] = $row['username'];
+			$user['email'] = $row['email'];
+			$user['user_role'] = $row['user_role'];
+			$user['image'] = $row['image'];
+
+				
+
+			return $user;
 
 		} catch (Exception $e) {
 
