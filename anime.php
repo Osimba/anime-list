@@ -63,20 +63,25 @@
 		<h1><?= $anime['title'] ?></h1>
 
 		<div class="anime-info">
-			<img src="images/attack-on-titan-cover.jpg">
-			<p>Genres: Action Anime, Drama Anime, Dub Anime, Fantasy Anime, Shounen Anime, Super Power Anime, Thriller Anime</p>
-			<p>Average Rating: 10/10</p>
-			<p>Summary: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+			<img src="<?php echo ROOT_DIR . $anime['image']; ?>">
+			<p><strong>Genres:</strong> <?php echo $anime['genre']; ?></p>
+			<p><strong>Average Rating:</strong> <?php echo $anime['rating'] . '/10'; ?></p>
+			<p><strong>Summary:</strong> <?php echo $anime['summary']; ?> </p>
 		</div>
 
 		<hr>
 
 		<h2>Comments</h2>
+
+		<form class="comment-form">
+			
+			<textarea class="form-control" name="message" placeholder="Add comment..."></textarea>
+
+			<input class="btn btn-primary btn-block" type="submit" name="submit" value="Send Comment">
+
+		</form>
+
+		<hr>
 
 		<?php forEach($comments as $comment) { ?>
 

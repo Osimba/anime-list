@@ -44,8 +44,13 @@ main form input {
 
 
 /* Members Page */
+.cover-img {
+	width: 100%;
+}
+
 main#members-page li {
 	list-style-type: none;
+	width: 90%;
 }
 
 .rating {
@@ -68,9 +73,7 @@ main#members-page li {
 		padding-top: 60%;
 	}
 
-#members-page img, #members-page p {
-	display: inline-block;
-}
+
 
 #members-page .anime-items a {
 	color: black;
@@ -83,6 +86,11 @@ main#members-page li {
 
 #anime-room hr {
 	clear: both;
+	margin-top: 10px;
+}
+
+#anime-room h2 {
+	margin-bottom: 30px;
 }
 
 .anime-info img {
@@ -90,6 +98,11 @@ main#members-page li {
 	float: left;
 	margin-right: 20px;
 	margin-bottom: 20px;
+}
+
+.comment-form {
+	margin-bottom: 30px;
+	padding: 20px;
 }
 
 .comment {

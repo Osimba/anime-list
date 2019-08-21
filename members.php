@@ -43,12 +43,12 @@
 				
 				<li class="col-md-6 col-lg-4 card">
 					<a href="<?php echo ROOT_DIR . 'anime.php?id=' . $a['id']; ?>">
-					<h3> <?= $a['title'] ?> </h3>
-					<img class="cover-img" src="<?= $a['image'] ?>">
-					<p class='rating'> <?= $a['rating'] ?>/10</p>
-					<p> <?= $a['genre'] ?> </p>
-					<p> <?= $a['episodes'] ?> episodes</p>
-				</a>
+						<h3> <?= $a['title'] ?> </h3>
+						<img class="cover-img" src="<?= $a['image'] ?>">
+						<p class='rating'> <?= $a['rating'] ?>/10</p>
+						<p> <?= $a['genre'] ?> </p>
+						<p> <?= $a['episodes'] ?> episodes</p>
+					</a>
 				</li>
 				
 			<?php } ?>
@@ -57,4 +57,4 @@
 
 	</main>
 
-<?php include('includes/templates/footer.php') ?>
+<?php include('includes/templates/footer.php'); ?>
