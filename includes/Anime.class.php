@@ -25,6 +25,7 @@ class Anime extends Dbh {
 				$animeRow[$i]['rating'] = $row['rating'];
 				$animeRow[$i]['episodes'] = $row['episodes'];
 				$animeRow[$i]['image'] = $row['image'];
+				$animeRow[$i]['summary'] = $row['summary'];
 				
 				$i++;		
 			}
@@ -58,6 +59,7 @@ class Anime extends Dbh {
 				$anime['rating'] = $row['rating'];
 				$anime['episodes'] = $row['episodes'];
 				$anime['image'] = $row['image'];
+				$anime['summary'] = $row['summary'];
 					
 		
 
@@ -113,12 +115,13 @@ class Anime extends Dbh {
 
 		try {
 
-			$stmt = $conn->prepare("INSERT INTO anime (title, genre, rating, episodes, image) VALUES (:title, :genre, :rating, :episodes, :image)");
+			$stmt = $conn->prepare("INSERT INTO anime (title, genre, rating, episodes, image, summary) VALUES (:title, :genre, :rating, :episodes, :image, :summary)");
 			$stmt->bindParam(':title', $title);
 			$stmt->bindParam(':genre', $genre);
 			$stmt->bindParam(':rating', $rating);
 			$stmt->bindParam(':episodes', $episodes);
 			$stmt->bindParam(':image', $image);
+			$stmt->bindParam(':summary', $summary);
 			$stmt->execute();
 
 			echo "Successfully added " . $title . " to the database";

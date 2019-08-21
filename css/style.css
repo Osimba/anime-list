@@ -62,7 +62,7 @@ main#members-page li {
 	color: white;
 	font-size: 5.0em;
 }
-	.card li:hover .rating {
+	li.card:hover .rating {
 		opacity: 1;
 		height: 100%;
 		padding-top: 60%;
@@ -72,7 +72,26 @@ main#members-page li {
 	display: inline-block;
 }
 
+#members-page .anime-items a {
+	color: black;
+}
+#members-page .anime-items a:hover {
+	text-decoration: none;
+}
+
 /* Anime Page */
+
+#anime-room hr {
+	clear: both;
+}
+
+.anime-info img {
+	width: 200px;
+	float: left;
+	margin-right: 20px;
+	margin-bottom: 20px;
+}
+
 .comment {
 	padding-bottom: 20px;
 	width: 100%;

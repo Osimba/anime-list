@@ -37,24 +37,24 @@
 	<main id="members-page" class="container text-center">
 		<h1>All Anime</h1>
 
-		<div class="row anime-items">
+		<ul class="row anime-items">
 			
 			<?php foreach($anime as $a) { ?>
-
-				<ul class="col-md-6 col-lg-4 card">
-					<li>
-						<h3> <?= $a['title'] ?> </h3>
-						<img class="cover-img" src="<?= $a['image'] ?>">
-						<p class='rating'> <?= $a['rating'] ?>/10</p>
-						<p> <?= $a['genre'] ?> </p>
-						<p> <?= $a['episodes'] ?> episodes</p>
-					</li>
-				</ul>
+				
+				<li class="col-md-6 col-lg-4 card">
+					<a href="<?php echo ROOT_DIR . 'anime.php?id=' . $a['id']; ?>">
+					<h3> <?= $a['title'] ?> </h3>
+					<img class="cover-img" src="<?= $a['image'] ?>">
+					<p class='rating'> <?= $a['rating'] ?>/10</p>
+					<p> <?= $a['genre'] ?> </p>
+					<p> <?= $a['episodes'] ?> episodes</p>
+				</a>
+				</li>
 				
 			<?php } ?>
 
-			
-		</div>
+		</ul>
+
 	</main>
 
 <?php include('includes/templates/footer.php') ?>
