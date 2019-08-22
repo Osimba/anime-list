@@ -3,7 +3,7 @@ require_once('Dbh.class.php');
 
 class User extends Dbh {
 
-	public function getAllUsers($username) {
+	public function getAllUsers() {
 
 		$conn = $this->connect();
 		$users = array();
@@ -193,11 +193,10 @@ class User extends Dbh {
 
 			try {
 			
-				$stmt = $conn->prepare("INSERT INTO users (username, email, password, user_role) VALUES (:username, :email, :password, :user_role)");
+				$stmt = $conn->prepare("INSERT INTO users (username, email, password) VALUES (:username, :email, :password)");
 				$stmt->bindParam(':username', $username);
 				$stmt->bindParam(':email', $email);
 				$stmt->bindParam(':password', $password);
-				$stmt->bindParam(':user_role', 'Member');
 				
 				if ($stmt->execute()) {
 					return 101;

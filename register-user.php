@@ -2,6 +2,7 @@
 
 	include('includes/Dbh.class.php');
 	include('includes/User.class.php');
+	include('includes/config.php');
 
 	/* Register New User */
 
@@ -55,11 +56,11 @@
 
 			<?php 
 				if($alert['error'] != '') {
-					echo "<div class='alert alert-danger'>" . $error['alert'] . "</div>";
+					echo "<div class='alert alert-danger'>" . $alert['error'] . "</div>";
 				}
 
 				if($alert['success'] != '') {
-					echo "<div class='alert alert-success'>" . $success['alert'] . "</div>";
+					echo "<div class='alert alert-success'>" . $alert['success'] . "</div>";
 				}
 			?>
 

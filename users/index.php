@@ -40,7 +40,7 @@
 		
 		<?php 
 			forEach($users as $user) { 
-				$image = ($user['image'] == '') ? ROOT_DIR . 'images/default-user.jpg' :  $user['image'];
+				$image =  ROOT_DIR . 'images/' . $user['image'];
 		?>
 			<div class="card">
 				<img class="user-image" src="<? echo $image; ?>">
