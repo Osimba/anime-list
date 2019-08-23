@@ -36,8 +36,7 @@
 
 		
 
-		
-
+	
 
 	} else {
 		//if not logged in redirect
@@ -73,7 +72,9 @@
 
 		<h2>Comments</h2>
 
-		<form class="comment-form">
+		<form class="comment-form" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
+
+			<input type="hidden" class="form-control" name="username" value="<?= $_SESSION['user'] ?>">
 			
 			<textarea class="form-control" name="message" placeholder="Add comment..."></textarea>
 
