@@ -130,4 +130,24 @@ class Anime extends Dbh {
 			echo "Failed to insert row: " . $e->getMessage();
 		}
 	}
+
+	public function addComment($user_id, $anime_id, $time_stamp, $comment) {
+
+		$conn = $this->connect();
+
+		try {
+			
+			$stmt = $conn->prepare("INSERT INTO comments (user_id, anime_id, time_stamp, comment) VALUES (:user_id, :anime_id, :time_stamp, :comment)");
+			$stmt->bindParam(':user_id', $user_id);
+			$stmt->bindParam(':anime_id', $anime_id);
+			$stmt->bindParam(':time_stamp', $time_stamp);
+			$stmt->bindParam(':comment', $comment);
+			$stmt->execute();
+
+			echo "Comment Sent!";
+
+		} catch (Exception $e) {
+			echo "Error: " . $e->getMessage();
+		}
+	}
 }

@@ -38,6 +38,29 @@ class User extends Dbh {
 		}
 	}
 
+	public function getUserId($username) {
+
+		$conn = $this->connect();
+		$user = array();
+
+		try {
+			
+			$stmt = $conn->prepare("SELECT id FROM users WHERE username = :username");
+			$stmt->bindParam(':username', $username);
+			$stmt->execute();
+
+			$row = $stmt->fetch();
+	
+
+			return $row['id'];
+
+		} catch (Exception $e) {
+
+			echo "Error: " . $e->getMessage();
+			
+		}
+	}
+
 	public function getUserInfo($id) {
 
 		$conn = $this->connect();

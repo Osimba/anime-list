@@ -72,17 +72,20 @@
 
 		<h2>Comments</h2>
 
-		<form class="comment-form" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
 
-			<input type="hidden" class="form-control" name="username" value="<?= $_SESSION['user'] ?>">
-			
-			<textarea class="form-control" name="message" placeholder="Add comment..."></textarea>
 
-			<input class="btn btn-primary btn-block" type="submit" name="submit" value="Send Comment">
+		<input type="hidden" class="form-control" name="user_id" value="<?= $userObj->getUserId($_SESSION['user']) ?>">
 
-		</form>
+		<input type="hidden" class="form-control" name="anime_id" value="<?= $userObj->getUserId($_SESSION['user']) ?>">
+		
+		<textarea class="form-control" name="message" placeholder="Add comment..."></textarea>
+
+		<button id="send-comment" class="btn btn-primary">Send Comment</button>
+
 
 		<hr>
+
+		<div id="comments-section">
 
 		<?php forEach($comments as $comment) { ?>
 
@@ -104,8 +107,10 @@
 
 		<?php } ?>
 
+		</div> <!-- #comments-section-->
 
-	</div>
+
+	</div><!-- .container -->
 
 </main>
 
