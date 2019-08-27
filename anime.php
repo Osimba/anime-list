@@ -76,7 +76,7 @@
 
 		<input type="hidden" class="form-control" name="user_id" value="<?= $userObj->getUserId($_SESSION['user']) ?>">
 
-		<input type="hidden" class="form-control" name="anime_id" value="<?= $userObj->getUserId($_SESSION['user']) ?>">
+		<input type="hidden" class="form-control" name="anime_id" value="<?= $userObj->getUserId($anime['id']) ?>">
 		
 		<textarea class="form-control" name="message" placeholder="Add comment..."></textarea>
 
