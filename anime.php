@@ -74,16 +74,22 @@
 
 
 
-		<input type="hidden" class="form-control" name="user_id" value="<?= $userObj->getUserId($_SESSION['user']) ?>">
+		<input id="userID" type="hidden" class="form-control" name="userID" value="<?= $userObj->getUserId($_SESSION['user']) ?>">
 
-		<input type="hidden" class="form-control" name="anime_id" value="<?= $userObj->getUserId($anime['id']) ?>">
+		<input id="animeID" type="hidden" class="form-control" name="animeID" value="<?= $anime['id'] ?>">
 		
-		<textarea class="form-control" name="message" placeholder="Add comment..."></textarea>
+		<input id="timeStamp" type="hidden" class="form-control" name="timeStamp" value="<?= date("Y-m-d H:i:s") ?>">
 
-		<button id="send-comment" class="btn btn-primary">Send Comment</button>
+		<textarea id="newComment" class="form-control" name="newComment" placeholder="Add comment..."></textarea>
+
+		<button id="sendComment" class="btn btn-primary">Send Comment</button>
 
 
 		<hr>
+
+		<div id="loader"></div>
+
+		<div id="result"></div>
 
 		<div id="comments-section">
 
@@ -113,5 +119,50 @@
 	</div><!-- .container -->
 
 </main>
+
+<script src="https://code.jquery.com/jquery-3.4.1.js"
+			integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+			crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+
+		
+
+		// Check if Send Comment button was clicked
+		$('#sendComment').click(function() {
+			$("#loader").show();
+
+			var userID = $('#userID').val();
+			var animeID = $('#animeID').val();
+			var timeStamp = $('#timeStamp').val();
+			var newComment = $('#newComment').val();
+
+			// Sends the data using AJAX POST method
+		    $.ajax({
+				method: "POST",
+				url: "add-comment.php",
+				data: {
+						user_id: userID,
+						anime_id: animeID,
+						time_stamp: timeStamp,
+						comment: newComment					
+			       	},
+				success: function(response) {
+					$("#result").html(response);
+					$("#loader").hide();
+
+				}
+			}); 
+
+
+
+		}); //#send-comment
+
+
+
+
+	});
+</script>
 
 <?php include('./includes/templates/footer.php') ?>
