@@ -104,11 +104,7 @@
 				<div class="comment-text">
 					<p><?php echo $comment['comment']; ?></p>
 					<a href="<?php echo '#comment-' . $comment['comment_num']; ?>">Reply</a>
-					</div>
-
-				 
-				
-				
+				</div>	 	
 			</div>
 
 		<?php } ?>

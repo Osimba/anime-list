@@ -144,10 +144,39 @@ class Anime extends Dbh {
 			$stmt->bindParam(':comment', $comment);
 			$stmt->execute();
 
-			echo "Comment Sent!";
+			$newCommentNum = $conn->lastInsertId();
+
+			return $this->getComment($newCommentNum);
 
 		} catch (Exception $e) {
 			echo "Error: " . $e->getMessage();
 		}
+	}
+
+	private function getComment($comment_num) {
+
+		$conn = $this->connect();
+
+		try {
+
+			$stmt = $conn->prepare("SELECT * FROM comments WHERE comment_num = :comment_num");
+			$stmt->bindParam(':comment_num', $comment_num);
+			$stmt->execute();
+
+			$row = $stmt->fetch();
+
+			$comment['comment_num'] = $row['comment_num'];
+			$comment['user_id'] = $row['user_id'];
+			$comment['anime_id'] = $row['anime_id'];
+			$comment['time_stamp'] = $row['time_stamp'];
+			$comment['comment'] = $row['comment'];
+
+			return $comment;
+			
+		} catch (Exception $e) {
+			echo "Error: " . $e->getMessage();
+		}
+
+		return null;
 	}
 }

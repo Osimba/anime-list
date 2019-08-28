@@ -20,7 +20,7 @@ $(document).ready(function() {
 					comment: newComment					
 		       	},
 			success: function(response) {
-				$("#result").html(response);
+				$("#comments-section").prepend(response);
 				$("#loader").hide();
 
 			}
