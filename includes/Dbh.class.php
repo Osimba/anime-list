@@ -8,6 +8,13 @@ class Dbh {
 	private $db;
 	private $charset;
 
+	/**
+	 * connect to DB using pdo
+	 * 
+	 * @access public
+	 * @param  
+	 * @return pdo Object
+	 */
 	public function connect() {
 		$this->server = 'localhost';
 		$this->user = 'root';

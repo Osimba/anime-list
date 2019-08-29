@@ -20,5 +20,6 @@
 	//Create Objects
 	$User = new User();
 	$Anime = new Anime();
+	$Comments = new Comments();
 
  ?>

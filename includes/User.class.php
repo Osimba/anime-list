@@ -4,6 +4,13 @@ require_once('Dbh.class.php');
 
 class User extends Dbh {
 
+	/**
+	 * Gets all users from DB
+	 * 
+	 * @access public
+	 * @param  none
+	 * @return array of user rows
+	 */
 	public function getAllUsers() {
 
 		$conn = $this->connect();
@@ -39,6 +46,13 @@ class User extends Dbh {
 		}
 	}
 
+	/**
+	 * Gets user_id from DB associated with specified username
+	 * 
+	 * @access public
+	 * @param  string
+	 * @return int for user id
+	 */
 	public function getUserId($username) {
 
 		$conn = $this->connect();
@@ -62,6 +76,13 @@ class User extends Dbh {
 		}
 	}
 
+	/**
+	 * Gets user from DB associated with provided user id
+	 * 
+	 * @access public
+	 * @param  none
+	 * @return array for user row
+	 */
 	public function getUserInfo($id) {
 
 		$conn = $this->connect();
@@ -93,6 +114,13 @@ class User extends Dbh {
 	}
 
 
+	/**
+	 * Check the user's login credentials
+	 * 
+	 * @access public
+	 * @param  string, string
+	 * @return true or false depending on if credentials are correct
+	 */
 	public function checkUserCredentials($username, $password) {
 		$user = array();
 		$conn = $this->connect();
@@ -111,6 +139,13 @@ class User extends Dbh {
 
 	}
 
+	/**
+	 * Adds token for password reset to DB to verify password change
+	 * 
+	 * @access public
+	 * @param  string, string
+	 * @return boolean
+	 */
 	public function resetRequest($email, $token) {
 
 		$conn = $this->connect();
@@ -133,6 +168,14 @@ class User extends Dbh {
 		return false;
 	}
 
+
+	/**
+	 * Change user password to newly provided password if email and token are correct
+	 * 
+	 * @access public
+	 * @param  string, string, string
+	 * @return boolean
+	 */
 	public function changePassword($email, $token, $password) {
 
 		$conn = $this->connect();
@@ -146,7 +189,7 @@ class User extends Dbh {
 			$stmt->execute();
 
 			if($stmt->rowCount() > 0) {
-				return destroyToken($email, $token);
+				return destroyToken($email);
 			}
 			
 			
@@ -157,7 +200,14 @@ class User extends Dbh {
 		return false;
 	}
 
-	private function destroyToken($email, $token) {
+	/**
+	 * Destroys token after password has been reset
+	 * 
+	 * @access private
+	 * @param  string
+	 * @return boolean
+	 */
+	private function destroyToken($email) {
 
 		$conn = $this->connect();
 
@@ -176,6 +226,13 @@ class User extends Dbh {
 		return false;
 	}
 
+	/**
+	 * Get's user password from database
+	 * 
+	 * @access private
+	 * @param  string
+	 * @return string
+	 */
 	private function getUser($username) {
 
 		$conn = $this->connect();
@@ -207,7 +264,13 @@ class User extends Dbh {
 	}
 
 
-	/* Create */
+	/**
+	 * Create new user in DB
+	 * 
+	 * @access public
+	 * @param  string, string, string
+	 * @return int
+	 */
 	public function createUser($username, $email, $password) {
 
 		$conn = $this->connect();
@@ -241,6 +304,13 @@ class User extends Dbh {
 
 	}
 
+	/**
+	 * Checks if user exists in DB
+	 * 
+	 * @access private
+	 * @param  string, string
+	 * @return boolean
+	 */
 	private function userExists($username, $email) {
 
 		$conn = $this->connect();

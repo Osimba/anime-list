@@ -16,7 +16,7 @@
 		} else {
 
 			$animeInfo = $Anime->getAnime($_GET['id']);
-			$comments = $Anime->getComments($animeInfo['id']);
+			$commentsInfo = $Comments->getComments($animeInfo['id']);
 
 			//check for inactivity
 			if(time() > $_SESSION['last_active'] + $config['session_timeout']) {
@@ -86,7 +86,7 @@
 
 		<div id="comments-section">
 
-		<?php forEach($comments as $comment) { ?>
+		<?php forEach($commentsInfo as $comment) { ?>
 
 
 			<div id="<?php echo 'comment-' . $comment['comment_num']; ?>" class="comment">
