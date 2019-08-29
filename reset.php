@@ -30,7 +30,7 @@
 			if ($result) {
 				$alert['success'] = "Password reset successfully! Please log in!";
 			} else {
-				$alert['error'] = "An error occured when trying to process your request. Please try again."
+				$alert['error'] = "An error occured when trying to process your request. Please try again.";
 			}
 
 		}
