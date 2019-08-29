@@ -1,8 +1,5 @@
 <?php
 
-	include('includes/Dbh.class.php');
-	include('includes/Anime.class.php');
-	include('includes/User.class.php');
 	include('includes/config.php');
 
 	session_start();
@@ -14,10 +11,9 @@
 
 		$username = trim($_POST['username']);
 		$password = $_POST['password'];
-		
-		$userObj = new User;
 
-		if($userObj->checkUserCredentials($username, $password)) {
+
+		if($User->checkUserCredentials($username, $password)) {
 
 			$_SESSION['user'] = $username;
 			$_SESSION['last_active'] = time();

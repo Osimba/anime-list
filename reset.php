@@ -1,7 +1,5 @@
 <?php
 
-	include('includes/Dbh.class.php');
-	include('includes/User.class.php');
 	include('includes/config.php');
 
 	require './vendor/autoload.php';
@@ -23,8 +21,7 @@
 			$alert['error'] = "The passwords do not match!";
 		} else {
 
-			$userObj = new User;
-			$result = $userObj->changePassword($email, $token, password_hash($_POST["password"], PASSWORD_BCRYPT));
+			$result = $User->changePassword($email, $token, password_hash($_POST["password"], PASSWORD_BCRYPT));
 			
 
 			if ($result) {

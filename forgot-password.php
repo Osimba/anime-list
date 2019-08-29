@@ -1,6 +1,5 @@
 <?php
-	include('includes/Dbh.class.php');
-	include('includes/User.class.php');
+
 	include('includes/config.php');
 
 	use PHPMailer\PHPMailer\PHPMailer;
@@ -18,8 +17,7 @@
 		$length = 50;
 		$token = bin2hex(openssl_random_pseudo_bytes($length));
 
-		$userObj = new User;
-		$request = $userObj->resetRequest($email, $token);
+		$request = $User->resetRequest($email, $token);
 
 		/* To Do
 		 * Create reset token ... alter database

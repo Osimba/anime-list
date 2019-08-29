@@ -12,5 +12,13 @@
 	const SMTP_USER = '81b1fb911c1cb9';
 	const SMTP_PASS = 'e5db0ec8da2826';
 
+	//Include Objects
+	include('includes/Dbh.class.php');
+	include('includes/Anime.class.php');
+	include('includes/User.class.php');
+
+	//Create Objects
+	$User = new User();
+	$Anime = new Anime();
 
  ?>

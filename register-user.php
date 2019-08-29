@@ -1,7 +1,5 @@
 <?php
 
-	include('includes/Dbh.class.php');
-	include('includes/User.class.php');
 	include('includes/config.php');
 
 	/* Register New User */
@@ -25,8 +23,7 @@
 			$alert['error'] = "The passwords do not match!";
 		} else {
 
-			$userObj = new User;
-			$result = $userObj->createUser(trim($_POST["username"]), trim($_POST["email"]), password_hash($_POST["password"], PASSWORD_BCRYPT));
+			$result = $User->createUser(trim($_POST["username"]), trim($_POST["email"]), password_hash($_POST["password"], PASSWORD_BCRYPT));
 
 			switch ($result) {
 				case 101:

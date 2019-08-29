@@ -1,9 +1,6 @@
 <?php
 	require __DIR__ . '/vendor/autoload.php';
 
-	include('includes/Dbh.class.php');
-	include('includes/Anime.class.php');
-	include('includes/User.class.php');
 	include("includes/config.php");
 
 	session_start();
@@ -11,8 +8,8 @@
 	//check if user is logged in
 	if(isset($_SESSION['user'])) {
 
-		$animeObj = new Anime;
-		$anime = $animeObj->getAllAnime();
+		$Anime = new Anime;
+		$animeResults = $Anime->getAllAnime();
 
 		//check for inactivity
 		if(time() > $_SESSION['last_active'] + $config['session_timeout']) {
@@ -39,15 +36,15 @@
 
 		<ul class="row anime-items">
 			
-			<?php foreach($anime as $a) { ?>
+			<?php foreach($animeResults as $result) { ?>
 				
 				<li class="col-md-6 col-lg-4 card">
-					<a href="<?php echo ROOT_DIR . 'anime.php?id=' . $a['id']; ?>">
-						<h3> <?= $a['title'] ?> </h3>
-						<img class="cover-img" src="<?= $a['image'] ?>">
-						<p class='rating'> <?= $a['rating'] ?>/10</p>
-						<p> <?= $a['genre'] ?> </p>
-						<p> <?= $a['episodes'] ?> episodes</p>
+					<a href="<?php echo ROOT_DIR . 'anime.php?id=' . $result['id']; ?>">
+						<h3> <?= $result['title'] ?> </h3>
+						<img class="cover-img" src="<?= $result['image'] ?>">
+						<p class='rating'> <?= $result['rating'] ?>/10</p>
+						<p> <?= $result['genre'] ?> </p>
+						<p> <?= $result['episodes'] ?> episodes</p>
 					</a>
 				</li>
 				

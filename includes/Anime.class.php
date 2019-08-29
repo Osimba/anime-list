@@ -1,4 +1,5 @@
 <?php
+
 require_once('Dbh.class.php');
 
 class Anime extends Dbh {
