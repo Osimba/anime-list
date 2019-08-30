@@ -6,7 +6,7 @@
 
 	if($_SERVER["REQUEST_METHOD"] == "POST") {
 
-		$comment = $Anime->addComment($_POST['user_id'], $_POST['anime_id'], $_POST['time_stamp'], $_POST['comment']);
+		$comment = $Comments->addComment($_POST['user_id'], $_POST['anime_id'], $_POST['time_stamp'], $_POST['comment']);
 
 
 		$output = "<div id='comment-" . $comment['comment_num'] . "' class='comment'>

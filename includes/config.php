@@ -16,6 +16,7 @@
 	include('includes/Dbh.class.php');
 	include('includes/Anime.class.php');
 	include('includes/User.class.php');
+	include('includes/Comments.class.php');
 
 	//Create Objects
 	$User = new User();
