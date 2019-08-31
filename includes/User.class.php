@@ -125,7 +125,7 @@ class User extends Dbh {
 		$user = array();
 		$conn = $this->connect();
 
-		$hash = $this->getUser($username);
+		$hash = $this->getUserPassword($username);
 
 		if(!$hash['error']) {
 
@@ -233,7 +233,7 @@ class User extends Dbh {
 	 * @param  string
 	 * @return string
 	 */
-	private function getUser($username) {
+	private function getUserPassword($username) {
 
 		$conn = $this->connect();
 
