@@ -330,5 +330,47 @@ class User extends Dbh {
 		}
 	}
 
-	
+	/**
+	 * Adds anime to the user's watched list
+	 * 
+	 * @access public
+	 * @param  int, int, double(3,1)
+	 * @return boolean
+	 */
+	public function addToWatched($username, $animeId, $userRating) {
+
+	}
+
+	/**
+	 * Adds anime to the user's dream list
+	 * 
+	 * @access public
+	 * @param  int, int
+	 * @return boolean
+	 */
+	public function addToDream($username, $animeId) {
+
+	}
+
+	/**
+	 * Removes anime from the user's watched list
+	 * 
+	 * @access public
+	 * @param  int, int, double(3,1)
+	 * @return boolean
+	 */
+	public function removeFromWatched($username, $animeId, $userRating) {
+
+	}
+
+	/**
+	 * Removes anime from the user's dream list
+	 * 
+	 * @access public
+	 * @param  int, int
+	 * @return boolean
+	 */
+	public function removeFromDream($username, $animeId) {
+
+	}
 }
