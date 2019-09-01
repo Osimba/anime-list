@@ -294,7 +294,7 @@ class User extends Dbh {
 				
 
 			} catch (Exception $e) {
-				echo $e->getMessage();
+				echo "Echo: " . $e->getMessage();
 			}
 		}
 
@@ -339,6 +339,25 @@ class User extends Dbh {
 	 */
 	public function addToWatched($username, $animeId, $userRating) {
 
+		$conn = $this->connect();
+
+		$userId = $this->getUserId($username);
+
+		try {
+			
+			$stmt = $conn->prepare("INSERT INTO watched_anime (user_id, anime_id, user_rating) VALUES (:user_id, :anime_id, :user_rating)");
+			$stmt->bindParam(":user_id", $userId);
+			$stmt->bindParam(":anime_id", $animeId);
+			$stmt->bindParam(":user_rating", $userRating);
+
+			if ($stmt->execute()) return TRUE;
+
+
+		} catch (Exception $e) {
+			echo "Echo: " . $e->getMessage();
+		}
+
+		return FALSE;
 	}
 
 	/**
@@ -350,17 +369,53 @@ class User extends Dbh {
 	 */
 	public function addToDream($username, $animeId) {
 
+		$conn = $this->connect();
+
+		$userId = $this->getUserId($username);
+
+		try {
+			
+			$stmt = $conn->prepare("INSERT INTO dream_anime (user_id, anime_id) VALUES (:user_id, :anime_id)");
+			$stmt->bindParam(":user_id", $userId);
+			$stmt->bindParam(":anime_id", $animeId);
+
+			if ($stmt->execute()) return TRUE;
+
+
+		} catch (Exception $e) {
+			echo "Echo: " . $e->getMessage();
+		}
+
+		return FALSE;
 	}
 
 	/**
 	 * Removes anime from the user's watched list
 	 * 
 	 * @access public
-	 * @param  int, int, double(3,1)
+	 * @param  int, int
 	 * @return boolean
 	 */
-	public function removeFromWatched($username, $animeId, $userRating) {
+	public function removeFromWatched($username, $animeId) {
 
+		$conn = $this->connect();
+
+		$userId = $this->getUserId($username);
+
+		try {
+			
+			$stmt = $conn->prepare("DELETE FROM watched_anime WHERE user_id = :user_id AND anime_id = :anime_id");
+			$stmt->bindParam(":user_id", $userId);
+			$stmt->bindParam(":anime_id", $animeId);
+
+			if ($stmt->execute()) return TRUE;
+
+
+		} catch (Exception $e) {
+			echo "Echo: " . $e->getMessage();
+		}
+
+		return FALSE;
 	}
 
 	/**
@@ -372,5 +427,23 @@ class User extends Dbh {
 	 */
 	public function removeFromDream($username, $animeId) {
 
+		$conn = $this->connect();
+
+		$userId = $this->getUserId($username);
+
+		try {
+			
+			$stmt = $conn->prepare("DELETE FROM dream_anime WHERE user_id = :user_id AND anime_id = :anime_id");
+			$stmt->bindParam(":user_id", $userId);
+			$stmt->bindParam(":anime_id", $animeId);
+
+			if ($stmt->execute()) return TRUE;
+
+
+		} catch (Exception $e) {
+			echo "Echo: " . $e->getMessage();
+		}
+
+		return FALSE;
 	}
 }
