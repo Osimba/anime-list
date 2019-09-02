@@ -2,6 +2,7 @@
 
 	//Directory
 	const ROOT_DIR = 'http://localhost/anime-list/';
+	const IMAGE_DIR = 'http://localhost/anime-list/images/';
 
 	//Session timeout variable
 	$config['session_timeout'] = 1099999 * 60; //seconds

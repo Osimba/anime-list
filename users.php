@@ -1,7 +1,7 @@
 <?php  
-	require '../vendor/autoload.php';
+	require './vendor/autoload.php';
 
-	include('../includes/config.php');
+	include('./includes/config.php');
 
 	session_start();
 
@@ -24,7 +24,7 @@
 		header('location: ../index.php?unauthorized');
 	}
 
-	include('../includes/templates/header.php');
+	include('./includes/templates/header.php');
 ?>
 
 <main id="members-page">
@@ -36,12 +36,14 @@
 		
 		<?php 
 			forEach($userResults as $result) { 
-				$image =  ROOT_DIR . 'images/' . $result['image'];
+				$image =  IMAGE_DIR . $result['image'];
+				$profileLink = ROOT_DIR . 'profile.php?id=' . $result['id']; 
 		?>
 			<div class="card">
-				<img class="user-image" src="<? echo $image; ?>">
-				<p><? echo $result['username']; ?></p>
-				<p><? echo $result['user_role']; ?></p>
+				<img class="user-image" src="<?= $image ?>">
+				<p><?= $result['username']; ?></p>
+				<p><?= $result['user_role']; ?></p>
+				<a href="<?= $profileLink ?>"><button class="btn btn-warning">Profile</button></a>
 			</div>
 		<?php } ?>
 		
@@ -50,4 +52,4 @@
 
 
 
-<?php include('../includes/templates/footer.php') ?>
+<?php include('./includes/templates/footer.php') ?>

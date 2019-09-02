@@ -27,10 +27,6 @@
 			}
 		}
 
-		
-
-	
-
 	} else {
 		//if not logged in redirect
 		header('location: ./index.php?unauthorized');
