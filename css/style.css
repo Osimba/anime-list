@@ -42,6 +42,12 @@ main form input {
 	width: 100px;
 }
 
+.btn-watched {
+	background-color: #FF9E00;
+}
+.btn-watched:hover {
+	background-color: #FFBC4F;
+}
 
 /* Members Page */
 .cover-img {

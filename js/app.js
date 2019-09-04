@@ -28,4 +28,8 @@ $(document).ready(function() {
 
 	}); //#send-comment
 
+	$('.btn-watched').click(function() {
+		
+	});
+
 });

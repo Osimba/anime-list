@@ -331,10 +331,41 @@ class User extends Dbh {
 	}
 
 	/**
+	 * Checks if the user has watched the anime
+	 * 
+	 * @access public
+	 * @param  string, int
+	 * @return boolean
+	 */
+	public function hasWatched($username, $animeId) {
+
+		$conn = $this->connect();
+
+		$userId = $this->getUserId($username);
+
+		try {
+			
+			$stmt = $conn->prepare("SELECT * FROM watched_anime WHERE user_id = :user_id AND anime_id = :anime_id");
+			$stmt->bindParam(":user_id", $userId);
+			$stmt->bindParam(":anime_id", $animeId);
+
+			$stmt->execute();
+			 
+			if($stmt->fetch()) return TRUE;
+
+
+		} catch (Exception $e) {
+			echo "Echo: " . $e->getMessage();
+		}
+
+		return FALSE;
+	}
+
+	/**
 	 * Adds anime to the user's watched list
 	 * 
 	 * @access public
-	 * @param  int, int, double(3,1)
+	 * @param  string, int, double(3,1)
 	 * @return boolean
 	 */
 	public function addToWatched($username, $animeId, $userRating) {
@@ -364,7 +395,7 @@ class User extends Dbh {
 	 * Adds anime to the user's dream list
 	 * 
 	 * @access public
-	 * @param  int, int
+	 * @param  string, int
 	 * @return boolean
 	 */
 	public function addToDream($username, $animeId) {
@@ -393,7 +424,7 @@ class User extends Dbh {
 	 * Removes anime from the user's watched list
 	 * 
 	 * @access public
-	 * @param  int, int
+	 * @param  string, int
 	 * @return boolean
 	 */
 	public function removeFromWatched($username, $animeId) {
@@ -422,7 +453,7 @@ class User extends Dbh {
 	 * Removes anime from the user's dream list
 	 * 
 	 * @access public
-	 * @param  int, int
+	 * @param  string, int
 	 * @return boolean
 	 */
 	public function removeFromDream($username, $animeId) {

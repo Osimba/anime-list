@@ -15,6 +15,13 @@
 			header('location: ./members.php');
 		} else {
 
+			$userWatched = $User->hasWatched($_SESSION['user'], $_GET['id']);
+			if($userWatched) {
+				echo "user has watched this anime.";
+			} else {
+				echo "user has not watched this anime.";
+			}
+
 			$animeInfo = $Anime->getAnime($_GET['id']);
 			$commentsInfo = $Comments->getComments($animeInfo['id']);
 
@@ -56,11 +63,11 @@
 			<p><strong>Average Rating:</strong> <?php echo $animeInfo['rating']; ?></p>
 			<p><strong>Summary:</strong> <?php echo $animeInfo['summary']; ?> </p>
 			<br>
-			<button class="btn btn-success" onclick="<?php if($User->addToWatched($_SESSION['user'], $animeInfo['id'], 9)) { echo "Added to watched list";} ?>">Add to Watched List</button> 
-			<button class="btn btn-warning" onclick="<?php if($User->addToDream($_SESSION['user'], $animeInfo['id'])) { echo "Added to dream list";} ?>">Add to Dream List</button>
+			<button class="btn btn-watched" onclick="<?php if($User->addToWatched($_SESSION['user'], $animeInfo['id'], 9)) { ?> alert('Added to watched list');<?php } ?>">Add to Watched List</button> 
+			<!--<button class="btn btn-warning" onclick="<?php if($User->addToDream($_SESSION['user'], $animeInfo['id'])) { echo "Added to dream list";} ?>">Add to Dream List</button>-->
 			<br><br>
-			<button class="btn btn-success" onclick="<?php if($User->removeFromWatched($_SESSION['user'], $animeInfo['id'])) { echo "Added to watched list";} ?>">Remove from Watched List</button> 
-			<button class="btn btn-warning" onclick="<?php if($User->removeFromDream($_SESSION['user'], $animeInfo['id'])) { echo "Added to dream list";} ?>">Remove from Dream List</button>
+			<button class="btn btn-watched" onclick="<?php if($User->removeFromWatched($_SESSION['user'], $animeInfo['id'])) { echo "Added to watched list";} ?>">Remove from Watched List</button> 
+			<!--<button class="btn btn-warning" onclick="<?php if($User->removeFromDream($_SESSION['user'], $animeInfo['id'])) { echo "Added to dream list";} ?>">Remove from Dream List</button>-->
 
 		</div>
 
