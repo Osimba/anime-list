@@ -377,12 +377,15 @@ class User extends Dbh {
 		try {
 			
 			$stmt = $conn->prepare("INSERT INTO watched_anime (user_id, anime_id, user_rating) VALUES (:user_id, :anime_id, :user_rating)");
-			$stmt->bindParam(":user_id", $userId);
-			$stmt->bindParam(":anime_id", $animeId);
-			$stmt->bindParam(":user_rating", $userRating);
+			$stmt->bindParam(':user_id', $userId);
+			$stmt->bindParam(':anime_id', $animeId);
+			$stmt->bindParam(':user_rating', $userRating);
 
-			if ($stmt->execute()) return TRUE;
+			$returnV = $userId . " " . $animeId . " " . $userRating;
 
+			$stmt->execute(); 
+
+			return $stmt;
 
 		} catch (Exception $e) {
 			echo "Echo: " . $e->getMessage();
