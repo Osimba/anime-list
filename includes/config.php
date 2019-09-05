@@ -24,4 +24,5 @@
 	$Anime = new Anime();
 	$Comments = new Comments();
 
+	//changes to config
  ?>
