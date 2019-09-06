@@ -27,7 +27,7 @@
 	include('./includes/templates/header.php');
 ?>
 
-<main id="members-page">
+<main id="users-page">
 
 	<h1>Users</h1>
 

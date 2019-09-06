@@ -133,6 +133,14 @@ main#members-page li {
 	}
 
 
+/* Users Page */
+#users-page .card {
+	width: 45%;
+	float: left;
+	margin: 0 15px;
+}
+
+
 @media only screen and (max-width: 480px){
 
 	main#members-page .cover-img {
