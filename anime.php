@@ -56,7 +56,8 @@
 	<div class="container">
 
 		<h1><?= $animeInfo['title'] ?></h1>
-		<?php print_r($User->addToWatched($_SESSION['user'], $animeInfo['id'], 9)); ?>
+
+		<div id="list-update"></div>
 
 		<div class="anime-info">
 			<img src="<?php echo ROOT_DIR . $animeInfo['image']; ?>">
@@ -64,12 +65,11 @@
 			<p><strong>Average Rating:</strong> <?php echo $animeInfo['rating']; ?></p>
 			<p><strong>Summary:</strong> <?php echo $animeInfo['summary']; ?> </p>
 			<br>
-			<button class="btn btn-watched" 
-			onclick="alert()">Add to Watched List</button> 
-			<button class="btn btn-warning" onclick="<?php if($User->addToDream($_SESSION['user'], $animeInfo['id'])) { echo "Added to dream list";} ?>">Add to Dream List</button>
+			<button class="btn btn-watched" onclick="<?php $User->addToWatched($_SESSION['user'], $animeInfo['id'], 9); ?>">Add to Watched List</button> 
+			<!--<button class="btn btn-warning" onclick="<?php //$User->addToDream($_SESSION['user'], $animeInfo['id']); ?>">Add to Dream List</button>
 			<br><br>
-			<button class="btn btn-watched" onclick="<?php if($User->removeFromWatched($_SESSION['user'], $animeInfo['id'])) { echo "Added to watched list";} ?>">Remove from Watched List</button> 
-			<button class="btn btn-warning" onclick="<?php if($User->removeFromDream($_SESSION['user'], $animeInfo['id'])) { echo "Added to dream list";} ?>">Remove from Dream List</button>
+			<button class="btn btn-watched" onclick="<?php //$User->removeFromWatched($_SESSION['user'], $animeInfo['id']); ?>">Remove from Watched List</button> 
+			<button class="btn btn-warning" onclick="<?php //$User->removeFromDream($_SESSION['user'], $animeInfo['id']); ?>">Remove from Dream List</button>-->
 
 		</div>
 

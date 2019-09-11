@@ -30,6 +30,24 @@ $(document).ready(function() {
 
 	$('.btn-watched').click(function() {
 		
+		var userName = $("#userName").val();
+		var animeID = $('#animeID').val();
+		var userRating = 9;
+
+		// Sends the data using AJAX POST method
+	    $.ajax({
+			method: "POST",
+			url: "config-watched.php",
+			data: {
+					username: userName,
+					anime_id: animeID,
+					user_rating: userRating			
+		       	},
+			success: function(response) {
+				$("#list-update").prepend(response);
+
+			}
+		});
 	});
 
 });

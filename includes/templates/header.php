@@ -25,7 +25,7 @@
 				    	<a class="nav-item nav-link" href="<? echo ROOT_DIR . 'users.php' ?>">All Users</a>
 				    </div>
 				    <div class="navbar-nav ml-auto">
-						<a class="nav-link" href="<? echo ROOT_DIR . 'profile.php?user=' . $_SESSION['user']; ?>"><?= $_SESSION["user"] ?></a>
+						<a id="userName" class="nav-link" href="<? echo ROOT_DIR . 'profile.php?user=' . $_SESSION['user']; ?>"><?= $_SESSION["user"] ?></a>
 						<a class="nav-link" href="<? echo ROOT_DIR . 'index.php?logout=true' ?>">Logout</a>
 					</div>
 				<?php else:?>
