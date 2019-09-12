@@ -381,11 +381,7 @@ class User extends Dbh {
 			$stmt->bindParam(':anime_id', $animeId);
 			$stmt->bindParam(':user_rating', $userRating);
 
-			$returnV = $userId . " " . $animeId . " " . $userRating;
-
-			$stmt->execute(); 
-
-			return $stmt;
+			if ($stmt->execute()) return TRUE;
 
 		} catch (Exception $e) {
 			echo "Echo: " . $e->getMessage();
