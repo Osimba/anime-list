@@ -1,5 +1,14 @@
 $(document).ready(function() {
 
+	// Display form for adding to watched
+	$('#add-to-watched').click(function() {
+		$('#watched-form').css('display', 'block');
+	});
+	$('#watched-form').click(function() {
+		$('#watched-form').css('display', 'none');
+	});
+
+
 	// Check if Send Comment button was clicked
 	$('#sendComment').click(function() {
 		$("#loader").show();
@@ -28,7 +37,7 @@ $(document).ready(function() {
 
 	}); //#send-comment
 
-	$('.btn-watched').click(function() {
+	$('#sendWatched').click(function() {
 		
 		var userName = $("#userName").val();
 		var animeID = $('#animeID').val();

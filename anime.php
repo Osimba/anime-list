@@ -16,11 +16,7 @@
 		} else {
 
 			$userWatched = $User->hasWatched($_SESSION['user'], $_GET['id']);
-			if($userWatched) {
-				echo "user has watched this anime.";
-			} else {
-				echo "user has not watched this anime.";
-			}
+			
 
 			$animeInfo = $Anime->getAnime($_GET['id']);
 			$commentsInfo = $Comments->getComments($animeInfo['id']);
@@ -65,12 +61,24 @@
 			<p><strong>Average Rating:</strong> <?php echo $animeInfo['rating']; ?></p>
 			<p><strong>Summary:</strong> <?php echo $animeInfo['summary']; ?> </p>
 			<br>
-			<button class="btn btn-watched" onclick="<?php $User->addToWatched($_SESSION['user'], $animeInfo['id'], 9); ?>">Add to Watched List</button> 
-			<!--<button class="btn btn-warning" onclick="<?php //$User->addToDream($_SESSION['user'], $animeInfo['id']); ?>">Add to Dream List</button>
-			<br><br>
-			<button class="btn btn-watched" onclick="<?php //$User->removeFromWatched($_SESSION['user'], $animeInfo['id']); ?>">Remove from Watched List</button> 
-			<button class="btn btn-warning" onclick="<?php //$User->removeFromDream($_SESSION['user'], $animeInfo['id']); ?>">Remove from Dream List</button>-->
+			<?php if($userWatched): ?>
+				<button id="remove-from-watched" class="btn btn-secondary">Remove from Watched List</button> 
+			<?php else: ?> 
+				<button id="add-to-watched" class="btn btn-watched">Add to Watched List</button> 
+			<?php endif ?>
+			
+		</div>
 
+		<div id="watched-form">
+			<form>
+				<br>
+				<h3>Add to Watched List</h3>
+				<label>Rating (1 to 10):</label>
+				<input type="number" name="userRating" min="1" max="10"><br><br>
+				<button id="sendWatched" class="btn btn-primary">Add to Watched</button>
+				<button class="btn btn-secondary">Cancel</button>
+				<br><br>
+			</form>
 		</div>
 
 		<hr>
