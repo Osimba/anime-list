@@ -44,6 +44,9 @@
 
 <main id="anime-room">
 	
+	<input id="userID" type="hidden" class="form-control" name="userID" value="<?= $User->getUserId($_SESSION['user']) ?>">
+
+	<input id="animeID" type="hidden" class="form-control" name="animeID" value="<?= $animeInfo['id'] ?>">
 	<!-- 
 		Display all the information for the given anime
 
@@ -70,15 +73,13 @@
 		</div>
 		<div id="watched-form-close"></div>
 		<div id="watched-form">
-			<form>
-				<br>
-				<h3>Add to Watched List</h3>
-				<label>Rating (1 to 10):</label>
-				<input type="number" name="userRating" min="1" max="10"><br><br>
-				<button id="sendWatched" class="btn btn-primary">Add to Watched</button>
-				<button class="btn btn-secondary">Cancel</button>
-				<br><br>
-			</form>
+			<br>
+			<h3>Add to Watched List</h3>
+			<label>Rating (1 to 10):</label>
+			<input id="userRating" type="number" name="userRating" min="1" max="10"><br><br>
+			<p></p>
+			<button id="sendWatched" class="btn btn-primary">Add to Watched</button>
+			<br><br>
 		</div>
 
 		<hr>
@@ -87,9 +88,6 @@
 
 
 
-		<input id="userID" type="hidden" class="form-control" name="userID" value="<?= $User->getUserId($_SESSION['user']) ?>">
-
-		<input id="animeID" type="hidden" class="form-control" name="animeID" value="<?= $animeInfo['id'] ?>">
 		
 		<input id="timeStamp" type="hidden" class="form-control" name="timeStamp" value="<?= date("Y-m-d H:i:s") ?>">
 

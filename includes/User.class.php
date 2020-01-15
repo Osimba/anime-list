@@ -294,7 +294,7 @@ class User extends Dbh {
 				
 
 			} catch (Exception $e) {
-				echo "Echo: " . $e->getMessage();
+				echo "Error: " . $e->getMessage();
 			}
 		}
 
@@ -355,7 +355,7 @@ class User extends Dbh {
 
 
 		} catch (Exception $e) {
-			echo "Echo: " . $e->getMessage();
+			echo "Error: " . $e->getMessage();
 		}
 
 		return FALSE;
@@ -368,11 +368,9 @@ class User extends Dbh {
 	 * @param  string, int, double(3,1)
 	 * @return boolean
 	 */
-	public function addToWatched($username, $animeId, $userRating) {
+	public function addToWatched($userId, $animeId, $userRating) {
 
 		$conn = $this->connect();
-
-		$userId = $this->getUserId($username);
 
 		try {
 			
@@ -384,7 +382,7 @@ class User extends Dbh {
 			if ($stmt->execute()) return TRUE;
 
 		} catch (Exception $e) {
-			echo "Echo: " . $e->getMessage();
+			echo "Error: " . $e->getMessage();
 		}
 
 		return FALSE;
@@ -413,7 +411,7 @@ class User extends Dbh {
 
 
 		} catch (Exception $e) {
-			echo "Echo: " . $e->getMessage();
+			echo "Error: " . $e->getMessage();
 		}
 
 		return FALSE;
@@ -442,7 +440,7 @@ class User extends Dbh {
 
 
 		} catch (Exception $e) {
-			echo "Echo: " . $e->getMessage();
+			echo "Error: " . $e->getMessage();
 		}
 
 		return FALSE;
@@ -471,7 +469,7 @@ class User extends Dbh {
 
 
 		} catch (Exception $e) {
-			echo "Echo: " . $e->getMessage();
+			echo "Error: " . $e->getMessage();
 		}
 
 		return FALSE;
