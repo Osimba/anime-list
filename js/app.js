@@ -3,9 +3,11 @@ $(document).ready(function() {
 	// Display form for adding to watched
 	$('#add-to-watched').click(function() {
 		$('#watched-form').css('display', 'block');
+		$('body').css('overflow', 'hidden');
 	});
-	$('#watched-form').click(function() {
-		$('#watched-form').css('display', 'none');
+	$('#watched-form-close').click(function() {
+		$('#watched-form-close').css('display', 'none');
+
 	});
 
 

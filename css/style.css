@@ -27,26 +27,37 @@ body {
 	#footer p {
 		margin: .5rem auto;
 	}
-
-#watched-form {
-	display: none;
-	opacity: 0.92;
-	position: absolute;
+#watched-form-close {
+	position: fixed;
+	z-index: 999999;
 	top: 0px;
 	left: 0px;
 	height: 100%;
 	width: 100%;
-	background-color: #000;
+}
+#watched-form {
+	display: none;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	height: 100%;
+	width: 100%;
+	background-color: rgba(0, 0, 0, 0.8);
+	z-index: 999999;
+	overflow: auto;
 }
 	#watched-form form {
 		text-align: center;
 		width: 450px;
-		margin: -72px 0 0 -275px;
-		left: 50%;
-		top: 50%;
+		height: 230px;
+		margin: -115px auto 0;
+		left: 0;
+		right: 0;
+		top: 50vh;
 		background-color: white;
-		position: relative;
+		position: fixed;
 		border: 5px solid #23bdff;
+		z-index: 999999;
 	}
 
 main h1 {

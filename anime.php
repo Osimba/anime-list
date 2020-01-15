@@ -68,7 +68,7 @@
 			<?php endif ?>
 			
 		</div>
-
+		<div id="watched-form-close"></div>
 		<div id="watched-form">
 			<form>
 				<br>
