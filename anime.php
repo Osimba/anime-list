@@ -15,7 +15,8 @@
 			header('location: ./members.php');
 		} else {
 
-			$userWatched = $User->hasWatched($_SESSION['user'], $_GET['id']);
+			$loggedUserId = $User->getUserId($_SESSION['user']);
+			$userWatched = $User->hasWatched($loggedUserId, $_GET['id']);
 			
 
 			$animeInfo = $Anime->getAnime($_GET['id']);
@@ -44,7 +45,7 @@
 
 <main id="anime-room">
 	
-	<input id="userID" type="hidden" class="form-control" name="userID" value="<?= $User->getUserId($_SESSION['user']) ?>">
+	<input id="userID" type="hidden" class="form-control" name="userID" value="<?= $loggedUserId ?>">
 
 	<input id="animeID" type="hidden" class="form-control" name="animeID" value="<?= $animeInfo['id'] ?>">
 	<!-- 
@@ -76,6 +77,7 @@
 			<br>
 			<h3>Add to Watched List</h3>
 			<label>Rating (1 to 10):</label>
+
 			<input id="userRating" type="number" name="userRating" min="1" max="10"><br><br>
 			<p></p>
 			<button id="sendWatched" class="btn btn-primary">Add to Watched</button>

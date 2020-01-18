@@ -6,6 +6,28 @@ $(document).ready(function() {
 		$('#watched-form').css('display', 'block');
 		$('body').css('overflow', 'hidden');
 	});
+	$('#remove-from-watched').click(function() {
+		var userID = $("#userID").val();
+		var animeID = $('#animeID').val();
+		var userRating = 'false';
+
+		// Sends the data using AJAX POST method
+	    $.ajax({
+			method: "POST",
+			url: "config-watched.php",
+			data: {
+					user_id: userID,
+					anime_id: animeID,
+					user_rating: userRating			
+		       	},
+			success: function(response) {
+				$("#list-update").html(response);
+				//window.location.reload();
+			}
+		});
+		
+	});
+
 	$('#watched-form-close').click(function() {
 		$('#watched-form').css('display', 'none');
 		$('#watched-form-close').css('display', 'none');
@@ -41,10 +63,11 @@ $(document).ready(function() {
 	}); //#send-comment
 
 	$('#sendWatched').click(function() {
+		$("#loader").show();
 		
 		var userID = $("#userID").val();
 		var animeID = $('#animeID').val();
-		var userRating = $('#userRating').val();;
+		var userRating = $('#userRating').val();
 
 		if (userRating >= 1 && userRating <= 10) {
 			// Sends the data using AJAX POST method
@@ -57,7 +80,9 @@ $(document).ready(function() {
 						user_rating: userRating			
 			       	},
 				success: function(response) {
-					$("#list-update").prepend(response);
+					console.log(response);
+					$("#loader").hide();
+					$("#watched-form").html(response);
 
 				}
 			});

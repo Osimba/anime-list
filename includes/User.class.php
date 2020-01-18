@@ -334,14 +334,12 @@ class User extends Dbh {
 	 * Checks if the user has watched the anime
 	 * 
 	 * @access public
-	 * @param  string, int
+	 * @param  int, int
 	 * @return boolean
 	 */
-	public function hasWatched($username, $animeId) {
+	public function hasWatched($userId, $animeId) {
 
 		$conn = $this->connect();
-
-		$userId = $this->getUserId($username);
 
 		try {
 			
@@ -365,25 +363,30 @@ class User extends Dbh {
 	 * Adds anime to the user's watched list
 	 * 
 	 * @access public
-	 * @param  string, int, double(3,1)
+	 * @param  int, int, double(3,1)
 	 * @return boolean
 	 */
 	public function addToWatched($userId, $animeId, $userRating) {
 
 		$conn = $this->connect();
 
-		try {
+		if(!$this->hasWatched($userId, $animeId)) {
+			try {
 			
-			$stmt = $conn->prepare("INSERT INTO watched_anime (user_id, anime_id, user_rating) VALUES (:user_id, :anime_id, :user_rating)");
-			$stmt->bindParam(':user_id', $userId);
-			$stmt->bindParam(':anime_id', $animeId);
-			$stmt->bindParam(':user_rating', $userRating);
+				$stmt = $conn->prepare("INSERT INTO watched_anime (user_id, anime_id, user_rating) VALUES (:user_id, :anime_id, :user_rating)");
+				$stmt->bindParam(':user_id', $userId);
+				$stmt->bindParam(':anime_id', $animeId);
+				$stmt->bindParam(':user_rating', $userRating);
 
-			if ($stmt->execute()) return TRUE;
+				if ($stmt->execute()) return TRUE;
 
-		} catch (Exception $e) {
-			echo "Error: " . $e->getMessage();
+			} catch (Exception $e) {
+				echo "Error: " . $e->getMessage();
+			}
+
 		}
+
+		
 
 		return FALSE;
 	}
@@ -421,14 +424,12 @@ class User extends Dbh {
 	 * Removes anime from the user's watched list
 	 * 
 	 * @access public
-	 * @param  string, int
+	 * @param  int, int
 	 * @return boolean
 	 */
-	public function removeFromWatched($username, $animeId) {
+	public function removeFromWatched($userId, $animeId) {
 
 		$conn = $this->connect();
-
-		$userId = $this->getUserId($username);
 
 		try {
 			
