@@ -72,7 +72,7 @@
 			<?php endif ?>
 			
 		</div>
-		<div id="watched-form-close"></div>
+		<div id="watched-form-close" class="close-popup"></div>
 		<div id="watched-form">
 			<br>
 			<h3>Add to Watched List</h3>

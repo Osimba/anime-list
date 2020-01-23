@@ -21,16 +21,20 @@ $(document).ready(function() {
 					user_rating: userRating			
 		       	},
 			success: function(response) {
-				$("#list-update").html(response);
-				//window.location.reload();
+				$('#watched-form-close').css('display', 'block');
+				$('body').css('overflow', 'hidden');
+				$("#watched-form").html(response);
+				$('#watched-form').css('display', 'block');
 			}
 		});
 		
 	});
 
-	$('#watched-form-close').click(function() {
+	$('.close-popup').click(function() {
 		$('#watched-form').css('display', 'none');
 		$('#watched-form-close').css('display', 'none');
+		$('body').css('overflow', 'unset');
+		window.location.reload();
 	});
 
 

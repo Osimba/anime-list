@@ -15,12 +15,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 		
 
 		if($addSuccessful) {
-			$response = "<i class='fas fa-check-circle'></i>
-			<br><p>Successfully added anime to your watched list!</p>
-			<br><br>
-			<br><br><button class='btn btn-secondary'>Done</button>";
+			$response = "<br><i class='fas fa-check-circle fa-5x' style='color: green;'></i>
+			<br><br><h4>Successfully added anime to your watched list!</h4>";
 		} else {
-			$response = 'Anime already added to watchlist!';
+			$response = "<br><i class='fas fa-times-circle fa-5x' style='color: red;'></i>
+			<br><br><h4>Anime already added to watchlist!</h4>";
 		}
 		
 		
@@ -28,7 +27,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 		$removeSuccessful = $User->removeFromWatched($_POST['user_id'], $_POST['anime_id']);
 
 		if($removeSuccessful) {
-			$response = "<p>Successfully removed anime from your watched list!</p>";
+			$response = "<br><i class='fas fa-check-circle fa-5x' style='color: green;'></i>
+			<br><br><h4>Successfully removed anime from your watched list!</h4>";
 		}
 
 	}
