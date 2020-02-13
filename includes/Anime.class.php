@@ -24,7 +24,6 @@ class Anime extends Dbh {
 
 			$i = 0;
 
-
 			while($row = $stmt->fetch()) {
 
 				$animeRow[$i]['id'] = $row['id'];
@@ -68,13 +67,13 @@ class Anime extends Dbh {
 
 			$row = $stmt->fetch();
 
-				$anime['id'] = $row['id'];
-				$anime['title'] = $row['title'];
-				$anime['genre'] = $row['genre'];
-				$anime['rating'] = $row['rating'];
-				$anime['episodes'] = $row['episodes'];
-				$anime['image'] = $row['image'];
-				$anime['summary'] = $row['summary'];
+			$anime['id'] = $row['id'];
+			$anime['title'] = $row['title'];
+			$anime['genre'] = $row['genre'];
+			$anime['rating'] = $row['rating'];
+			$anime['episodes'] = $row['episodes'];
+			$anime['image'] = $row['image'];
+			$anime['summary'] = $row['summary'];
 					
 		
 
@@ -117,6 +116,28 @@ class Anime extends Dbh {
 		
 		} catch (Exception $e) {
 			echo "Failed to insert row: " . $e->getMessage();
+		}
+	}
+
+	public function updateRating($animeId) {
+
+		$conn = $this->connect();
+
+		//Pull data from database
+		try {
+
+
+			$stmt = $conn->prepare("UPDATE anime SET rating = 
+				(IFNULL(
+					(SELECT AVG(user_rating) FROM watched_anime WHERE anime_id = :anime_id), 0.0)
+				) WHERE id = :anime_id;");
+			$stmt->bindParam(':anime_id', $animeId);
+			
+
+			return $stmt->execute();;
+			
+		} catch (Exception $e) {
+			echo "Unable to get data from database: " . $e->getMessage();
 		}
 	}
 

@@ -18,9 +18,11 @@
 			$loggedUserId = $User->getUserId($_SESSION['user']);
 			$userWatched = $User->hasWatched($loggedUserId, $_GET['id']);
 			
-
 			$animeInfo = $Anime->getAnime($_GET['id']);
 			$commentsInfo = $Comments->getComments($animeInfo['id']);
+
+			$animeRating = $Anime->updateRating($animeInfo['id']);
+
 
 			//check for inactivity
 			if(time() > $_SESSION['last_active'] + $config['session_timeout']) {
@@ -35,7 +37,6 @@
 		//if not logged in redirect
 		header('location: ./index.php?unauthorized');
 	}
-
 
 
 

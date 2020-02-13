@@ -14,6 +14,8 @@
 </head>
 <body>
 
+	<?php  ?>
+
 	<header>
 		<nav class="navbar navbar-expand-lg navbar-light">
 				<a class="navbar-brand" href="<?= ROOT_DIR ?>">Anime Database</a>

@@ -15,6 +15,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 		
 
 		if($addSuccessful) {
+			$Anime->updateRating($_POST['anime_id']);
 			$response = "<br><i class='fas fa-check-circle fa-5x' style='color: green;'></i>
 			<br><br><h4>Successfully added anime to your watched list!</h4>";
 		} else {

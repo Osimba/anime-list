@@ -25,7 +25,6 @@
 		header('location: ./index.php?unauthorized');
 	}
 
-	$userID = 001;
 
 	include('includes/templates/header.php');
 
