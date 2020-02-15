@@ -165,6 +165,43 @@ main#members-page li {
 	margin: 0 15px;
 }
 
+/* Profile Page */
+.watched-table {
+	width: 90%;
+	margin: 5px auto;
+}
+	.watched-table .head {
+		background-color: blue;
+		color: white;
+		border: white 1px solid;
+		margin: 0;
+	}
+		.watched-table .head p {
+			border: white 1px solid;
+			position: relative;
+			margin: 0;
+			top: 0; left: 0; right: 0; bottom: 0;
+		}
+	.watched-table .list-item {
+		border: gray 1px solid;
+		margin: 0;
+	}
+		.watched-table .list-item > * {
+			border: gray 1px solid;
+			margin: 0;
+			padding: 15px;
+		}
+		.watched-table .list-item > div {
+		}
+		.watched-table .list-item img {
+			width: 100px;
+			float: left;
+		}
+		.watched-table .list-item h4,
+		.watched-table .list-item p {
+			padding-left: 5px;
+		}
+
 
 @media only screen and (max-width: 480px){
 

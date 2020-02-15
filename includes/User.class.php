@@ -477,4 +477,44 @@ class User extends Dbh {
 
 		return FALSE;
 	}
+
+	/**
+	 * Gets user watched list
+	 * 
+	 * @access public
+	 * @param  none
+	 * @return array of watched anime of user
+	 */
+	public function getWatchedAnime($userId) {
+
+		$conn = $this->connect();
+		$users = array();
+
+		try {
+			
+			$stmt = $conn->prepare("SELECT anime.title, anime.rating, anime.image, anime.episodes 
+				FROM anime 
+				INNER JOIN watched_anime ON anime.id = watched_anime.anime_id 
+				WHERE watched_anime.user_id = :user_id ORDER BY anime.title ASC");
+			$stmt->bindParam(":user_id", $userId);
+			$stmt->execute();
+
+			$i = 0;
+
+
+			while($row = $stmt->fetch()) {
+
+				$users[$i] = $row;
+
+				$i++;		
+			}
+
+			return $users;
+
+		} catch (Exception $e) {
+
+			echo "Error: " . $e->getMessage();
+			
+		}
+	}
 }

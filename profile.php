@@ -52,6 +52,29 @@
 	
 	<h1><?= $userInfo['username'] ?></h1>
 
+	<h3>Watched Anime</h3>
+
+	<div class="watched-table">
+		<div class="row head text-center">
+			<div class="col-5">Title</div>
+			<p class="col-2">Rating</p>
+			<p class="col-3">Your Rating</p>
+			<p class="col-2">Status</p>
+		</div>
+
+		<div class="row list-item">
+			<div class="col-5">
+				<img src="images/attack-on-titan-cover.jpg">
+				<h4>Attack on Titan</h4>
+				<p>24 eps</p>
+			</div>
+			<p class="col-2 text-center">10.0</p>
+			<p class="col-3 text-center">10.0</p>
+			<p class="col-2 text-center">Remove from Watched</p>
+		</div>
+
+	</div>
+
 </main>
 
 <?php include('includes/templates/footer.php') ?>
