@@ -52,6 +52,10 @@ body {
 	border: 5px solid #23bdff;
 	z-index: 10;
 }
+#addAlert {
+	color: red;
+	display: none;
+}
 
 main h1 {
 	margin-top: 30px;
@@ -166,9 +170,14 @@ main#members-page li {
 }
 
 /* Profile Page */
+#profile-page h3 {
+	margin-left: 5%;
+}
 .watched-table {
 	width: 90%;
 	margin: 5px auto;
+	list-style-type: none;
+	padding: 0;
 }
 	.watched-table .head {
 		background-color: blue;
@@ -183,7 +192,7 @@ main#members-page li {
 			top: 0; left: 0; right: 0; bottom: 0;
 		}
 	.watched-table .list-item {
-		border: gray 1px solid;
+		border-collapse: collapse;
 		margin: 0;
 	}
 		.watched-table .list-item > * {
@@ -196,6 +205,7 @@ main#members-page li {
 		.watched-table .list-item img {
 			width: 100px;
 			float: left;
+			padding-right: 10px;
 		}
 		.watched-table .list-item h4,
 		.watched-table .list-item p {

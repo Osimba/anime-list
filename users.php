@@ -13,7 +13,7 @@
 		//check for inactivity
 		if(time() > $_SESSION['last_active'] + $config['session_timeout']) {
 			session_destroy();
-			header('location: ../index.php?timeout');
+			header('location: ./index.php?timeout');
 		} else {
 			$_SESSION['last_active'] = time();
 		}
@@ -21,7 +21,7 @@
 
 	} else {
 		//if not logged in redirect
-		header('location: ../index.php?unauthorized');
+		header('location: ./index.php?unauthorized');
 	}
 
 	include('./includes/templates/header.php');

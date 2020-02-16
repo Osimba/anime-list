@@ -61,9 +61,9 @@
 		<div id="list-update"></div>
 
 		<div class="anime-info">
-			<img src="<?php echo ROOT_DIR . $animeInfo['image']; ?>">
+			<img src="<?php echo IMAGE_DIR . $animeInfo['image']; ?>">
 			<p><strong>Genres:</strong> <?php echo $animeInfo['genre']; ?></p>
-			<p><strong>Average Rating:</strong> <?php echo $animeInfo['rating']; ?></p>
+			<p><strong>Average Rating:</strong> <?php echo ($animeInfo['rating'] == 0.0) ? 'N/A' : $animeInfo['rating']; ?></p>
 			<p><strong>Summary:</strong> <?php echo $animeInfo['summary']; ?> </p>
 			<br>
 			<?php if($userWatched): ?>
@@ -80,7 +80,8 @@
 			<label>Rating (1 to 10):</label>
 
 			<input id="userRating" type="number" name="userRating" min="1" max="10"><br><br>
-			<p></p>
+			<div id="loader"></div>
+			<p id="addAlert">Rating must be between 1 and 10!</p>
 			<button id="sendWatched" class="btn btn-primary">Add to Watched</button>
 			<br><br>
 		</div>

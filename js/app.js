@@ -86,12 +86,14 @@ $(document).ready(function() {
 				success: function(response) {
 					console.log(response);
 					$("#loader").hide();
+					$("#addAlert").hide();
 					$("#watched-form").html(response);
 
 				}
 			});
 		} else {
-
+			$("#loader").hide();
+			$("#addAlert").show();
 		}
 
 		

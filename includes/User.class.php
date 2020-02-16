@@ -488,11 +488,11 @@ class User extends Dbh {
 	public function getWatchedAnime($userId) {
 
 		$conn = $this->connect();
-		$users = array();
+		$watched = array();
 
 		try {
 			
-			$stmt = $conn->prepare("SELECT anime.title, anime.rating, anime.image, anime.episodes 
+			$stmt = $conn->prepare("SELECT anime.id, anime.title, anime.rating, watched_anime.user_rating, anime.image, anime.episodes 
 				FROM anime 
 				INNER JOIN watched_anime ON anime.id = watched_anime.anime_id 
 				WHERE watched_anime.user_id = :user_id ORDER BY anime.title ASC");
@@ -504,12 +504,17 @@ class User extends Dbh {
 
 			while($row = $stmt->fetch()) {
 
-				$users[$i] = $row;
+				$watched[$i]['id'] = $row['id'];
+				$watched[$i]['title'] = $row['title'];
+				$watched[$i]['rating'] = $row['rating'];
+				$watched[$i]['user_rating'] = $row['user_rating'];
+				$watched[$i]['image'] = $row['image'];
+				$watched[$i]['episodes'] = $row['episodes'];
 
 				$i++;		
 			}
 
-			return $users;
+			return $watched;
 
 		} catch (Exception $e) {
 

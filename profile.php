@@ -28,6 +28,7 @@
 		} else {
 
 			$userInfo = $User->getUserInfo($_GET['id']);
+			$userWatchedList = $User->getWatchedAnime($userInfo['id']);
 
 			//check for inactivity
 			if(time() > $_SESSION['last_active'] + $config['session_timeout']) {
@@ -54,27 +55,43 @@
 
 	<h3>Watched Anime</h3>
 
-	<div class="watched-table">
-		<div class="row head text-center">
+
+	<ul class="watched-table">
+		<li class="row head text-center">
 			<div class="col-5">Title</div>
 			<p class="col-2">Rating</p>
-			<p class="col-3">Your Rating</p>
+			<p class="col-3">User Rating</p>
 			<p class="col-2">Status</p>
-		</div>
+		</li>
+	<?php 
 
-		<div class="row list-item">
+		if(count($userWatchedList) == 0):
+			echo "<p>No Anime on list</p>";
+		else: foreach ($userWatchedList as $animeInfo) { 
+
+	?>
+
+	
+		<li class="row list-item">
 			<div class="col-5">
-				<img src="images/attack-on-titan-cover.jpg">
-				<h4>Attack on Titan</h4>
-				<p>24 eps</p>
+				<img src="<?php echo IMAGE_DIR . $animeInfo['image']; ?>">
+				<h4><?php echo $animeInfo['title']; ?></h4>
+				<p><?php echo $animeInfo['episodes'] . " eps"; ?></p>
 			</div>
-			<p class="col-2 text-center">10.0</p>
-			<p class="col-3 text-center">10.0</p>
-			<p class="col-2 text-center">Remove from Watched</p>
-		</div>
-
-	</div>
-
+			<p class="col-2 text-center"><?php echo $animeInfo['rating']; ?></p>
+			<p class="col-3 text-center"><?php echo $animeInfo['user_rating']; ?></p>
+			<p class="col-2 text-center">
+				<?php if($User->hasWatched($userInfo['id'], $animeInfo['id'])): ?>
+					<button id="remove-from-watched" class="btn btn-secondary">Remove</button> 
+				<?php else: ?> 
+					<button id="add-to-watched" class="btn btn-watched">Add</button> 
+				<?php endif ?>
+					
+			</p>
+		</li>
+		
+	<?php } endif; ?>
+	</ul>
 </main>
 
 <?php include('includes/templates/footer.php') ?>

@@ -40,8 +40,8 @@
 				<li class="col-md-6 col-lg-4 card">
 					<a href="<?php echo ROOT_DIR . 'anime.php?id=' . $result['id']; ?>">
 						<h3> <?= $result['title'] ?> </h3>
-						<img class="cover-img" src="<?= $result['image'] ?>">
-						<p class='rating'> <?= $result['rating'] ?></p>
+						<img class="cover-img" src="<? echo IMAGE_DIR . $result['image']; ?>">
+						<p class='rating'> <?php echo ($result['rating'] == 0.0) ? 'N/A' : $result['rating'];?></p>
 						<p> <?= $result['genre'] ?> </p>
 						<p> <?= $result['episodes'] ?> episodes</p>
 					</a>
